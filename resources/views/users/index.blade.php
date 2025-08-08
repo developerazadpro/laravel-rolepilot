@@ -1,52 +1,53 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="h4 fw-bold text-gray-800">User Management</h2>
-    </x-slot>
+    <div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
 
-    <div class="container my-4">
+        <h2 class="text-2xl font-semibold mb-4">Users</h2>
+
         @if(session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
+            <div class="mb-4 px-4 py-2 bg-green-100 text-green-800 rounded">
+                {{ session('success') }}
+            </div>
         @endif
 
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <table class="table table-bordered table-hover align-middle mb-0">
-                    <thead class="table-light">
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Roles</th>
-                            <th style="width: 120px;">Actions</th>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-200 rounded">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="text-left py-2 px-4 border-b">Name</th>
+                        <th class="text-left py-2 px-4 border-b">Email</th>
+                        <th class="text-left py-2 px-4 border-b">Roles</th>
+                        <th class="text-left py-2 px-4 border-b">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($users as $user)
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-2 px-4 border-b">{{ $user->name }}</td>
+                            <td class="py-2 px-4 border-b">{{ $user->email }}</td>
+                            <td class="py-2 px-4 border-b">
+                                @if($user->roles->count())
+                                    {{ $user->roles->pluck('name')->join(', ') }}
+                                @else
+                                    <span class="text-gray-500 italic">No role assigned</span>
+                                @endif
+                            </td>
+                            <td class="py-2 px-4 border-b space-x-2">
+                                <a href="{{ route('users.editRole', $user->id) }}"
+                                   class="inline-block px-3 py-1 text-sm bg-yellow-500 text-white rounded hover:bg-yellow-600">
+                                    Edit Role
+                                </a>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($users as $user)
-                            <tr>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>
-                                    @if($user->roles->count())
-                                        {{ $user->roles->pluck('name')->join(', ') }}
-                                    @else
-                                        <span class="text-muted fst-italic">No role assigned</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="{{ route('users.editRole', $user->id) }}" class="btn btn-sm btn-primary">
-                                        Edit Role
-                                    </a>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="4" class="text-center text-muted fst-italic py-4">
-                                    No users found.
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
+                    @empty
+                        <tr>
+                            <td colspan="4" class="text-center py-4 text-gray-500 italic">
+                                No users found.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
+
     </div>
 </x-app-layout>
