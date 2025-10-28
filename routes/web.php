@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PermissionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,6 +38,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
         Route::get('/users/{id}/edit-role', [UserController::class, 'editRole'])->name('users.editRole');
         Route::put('/users/{id}/update-role', [UserController::class, 'updateRole'])->name('users.updateRole');
+    });
+
+    // Permissions Management — requires "manage permissions" permission
+    Route::middleware('permission:manage permissions')->group(function () {
+        Route::resource('permissions', PermissionController::class)
+            ->only(['index', 'create', 'store', 'destroy'])
+            ->names('permissions');
     });
 });
 

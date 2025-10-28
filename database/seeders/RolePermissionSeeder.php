@@ -19,6 +19,7 @@ class RolePermissionSeeder extends Seeder
             'view dashboard',
             'manage users',
             'manage roles',
+            'manage permissions',
             'view settings',
         ];
 
