@@ -13,17 +13,31 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Profile routes (auth required)
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');    
 });
 
-Route::middleware(['auth', 'role:Admin'])->group(function () {
-    Route::resource('roles', RoleController::class)->names('roles');
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    Route::get('/users/{id}/edit-role', [UserController::class, 'editRole'])->name('users.editRole');
-    Route::put('/users/{id}/update-role', [UserController::class, 'updateRole'])->name('users.updateRole');
+/*
+|-------------------------------------------------------------------------------------------------------------
+| Permission-based Protected Routes
+|-------------------------------------------------------------------------------------------------------------
+*/
+
+Route::middleware(['auth'])->group(function () {
+    // Roles Management — users who can "manage roles"
+    Route::middleware('permission:manage roles')->group(function () {
+        Route::resource('roles', RoleController::class)->names('roles');
+    });
+
+    // Users Management — users who can "manage users"
+    Route::middleware('permission:manage users')->group(function () {
+        Route::get('/users', [UserController::class, 'index'])->name('users.index');
+        Route::get('/users/{id}/edit-role', [UserController::class, 'editRole'])->name('users.editRole');
+        Route::put('/users/{id}/update-role', [UserController::class, 'updateRole'])->name('users.updateRole');
+    });
 });
 
 require __DIR__.'/auth.php';
