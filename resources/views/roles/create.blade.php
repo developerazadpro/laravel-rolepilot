@@ -1,4 +1,9 @@
-<x-app-layout>
+<x-admin-layout>
+    <x-slot name="breadcrumb">
+        <nav class="text-gray-500 text-sm">
+            <a href="{{ route('dashboard') }}" class="hover:underline">Dashboard</a> &gt; Roles
+        </nav>
+    </x-slot>
     <div class="max-w-3xl mx-auto p-4 sm:p-6 lg:p-8 bg-white shadow rounded">
 
         <h2 class="text-2xl font-semibold mb-6">Create Role</h2>
@@ -34,13 +39,17 @@
                 @enderror
             </div>
 
-            <!-- Submit Button -->
-            <div>
+            <!-- Action Buttons -->
+            <div class="flex justify-between">
+                <a href="{{ route('roles.index') }}"
+                   class="px-4 py-2 bg-gray-500 text-white text-sm font-semibold rounded hover:bg-gray-600 transition">
+                    Cancel
+                </a>
                 <button type="submit"
-                        class="px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded hover:bg-green-700">
+                        class="px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded hover:bg-blue-700 transition">
                     Create
                 </button>
             </div>
         </form>
     </div>
-</x-app-layout>
+</x-admin-layout>

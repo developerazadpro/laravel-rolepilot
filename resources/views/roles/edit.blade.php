@@ -1,4 +1,9 @@
-<x-app-layout>
+<x-admin-layout>
+    <x-slot name="breadcrumb">
+        <nav class="text-gray-500 text-sm">
+            <a href="{{ route('dashboard') }}" class="hover:underline">Dashboard</a> &gt; Roles
+        </nav>
+    </x-slot>
     <div class="max-w-3xl mx-auto p-4 sm:p-6 lg:p-8 bg-white shadow rounded">
 
         <h2 class="text-2xl font-semibold mb-6">Edit Role</h2>
@@ -48,4 +53,4 @@
             </div>
         </form>
     </div>
-</x-app-layout>
+</x-admin-layout>

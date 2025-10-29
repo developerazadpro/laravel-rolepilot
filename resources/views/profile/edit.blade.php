@@ -1,4 +1,9 @@
-<x-app-layout>
+<x-admin-layout>
+    <x-slot name="breadcrumb">
+        <nav class="text-gray-500 text-sm">
+            <a href="{{ route('dashboard') }}" class="hover:underline">Dashboard</a> &gt; Profile
+        </nav>
+    </x-slot>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Profile') }}
@@ -26,4 +31,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-admin-layout>
