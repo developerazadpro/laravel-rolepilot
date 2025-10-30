@@ -9,17 +9,31 @@
 
         <h2 class="text-xl sm:text-2xl font-semibold mb-4">Roles</h2>
 
-        <a href="{{ route('roles.create') }}"
-            class="inline-flex items-center mb-4 px-3 sm:px-4 py-1 sm:py-2 bg-blue-600 text-white text-sm sm:text-base font-semibold rounded shadow hover:bg-blue-700 transition">
-            Create New
-        </a>
-
         @if(session('success'))
             <div class="mb-4 px-3 sm:px-4 py-2 bg-green-100 text-green-800 rounded text-sm sm:text-base">
                 {{ session('success') }}
             </div>
         @endif
 
+        <!-- Search and Filter -->         
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-2">
+            <a href="{{ route('roles.create') }}"
+                class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded shadow hover:bg-blue-700 transition">
+                + Add Role
+            </a>
+
+            <form method="GET" action="{{ route('roles.index') }}" class="w-full sm:w-1/2 flex">
+                <input type="text" name="search" value="{{ $search ?? '' }}"
+                    placeholder="Search roles..."
+                    class="flex-grow border-green-300 rounded-l-md focus:ring-green-500 focus:border-green-500">
+                <button type="submit"
+                    class="px-3 bg-green-600 text-white rounded-r-md hover:bg-green-700">
+                    Search
+                </button>
+            </form>
+        </div>
+         <!--/.  -->
+         
         <div class="overflow-x-auto">
             <table class="min-w-full bg-white border border-gray-200 rounded text-sm sm:text-base">
                 <thead>

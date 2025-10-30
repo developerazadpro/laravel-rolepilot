@@ -7,9 +7,17 @@ use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $permissions = Permission::orderBy('name')->paginate(10);
+        $search = $request->input('search');
+
+        $permissions = Permission::when($search, function ($query, $search){
+            $query->where('name', 'like', "%{$search}%");
+        })
+        ->orderBy('name')
+        ->paginate(10)
+        ->withQueryString();
+
         return view('permissions.index', compact('permissions'));
     }
 

@@ -36,8 +36,12 @@ Route::middleware(['auth'])->group(function () {
     // Users Management — users who can "manage users"
     Route::middleware('permission:manage users')->group(function () {
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
+        Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+        Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
         Route::get('/users/{id}/edit-role', [UserController::class, 'editRole'])->name('users.editRole');
         Route::put('/users/{id}/update-role', [UserController::class, 'updateRole'])->name('users.updateRole');
+        Route::delete('/users/{user}/destroy', [UserController::class, 'destroy'])->name('users.destroy');
+
     });
 
     // Permissions Management — requires "manage permissions" permission
