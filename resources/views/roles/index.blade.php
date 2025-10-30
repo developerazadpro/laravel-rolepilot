@@ -52,5 +52,10 @@
             </table>
         </div>
 
+        <!-- Pagination Links -->
+        <div class="mt-4">
+            {{ $roles->links() }}
+        </div>
+
     </div>
 </x-admin-layout>
