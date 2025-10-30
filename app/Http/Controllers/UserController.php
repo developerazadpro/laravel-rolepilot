@@ -86,4 +86,16 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     }
 
+    public function toggleActive(User $user)
+    {
+        $user->is_active = !$user->is_active; // flip status
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'status' => $user->is_active ? 'active' : 'inactive',
+        ]);
+    }
+
+
 }

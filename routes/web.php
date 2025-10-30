@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/users/{id}/edit-role', [UserController::class, 'editRole'])->name('users.editRole');
         Route::put('/users/{id}/update-role', [UserController::class, 'updateRole'])->name('users.updateRole');
         Route::delete('/users/{user}/destroy', [UserController::class, 'destroy'])->name('users.destroy');
+        Route::put('/users/{user}/toggle-active', [UserController::class, 'toggleActive'])->name('users.toggleActive');
 
     });
 
