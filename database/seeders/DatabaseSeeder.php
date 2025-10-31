@@ -27,5 +27,8 @@ class DatabaseSeeder extends Seeder
 
         // Assign Admin role to first user
         $user->assignRole('Admin');
+
+        // Create Menu Seeder
+        $this->call(MenuSeeder::class);
     }
 }

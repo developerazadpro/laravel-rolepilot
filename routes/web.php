@@ -12,7 +12,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified', 'permission:view dashboard'])->name('dashboard');
 
 // Profile routes (auth required)
 Route::middleware('auth')->group(function () {
@@ -28,28 +28,98 @@ Route::middleware('auth')->group(function () {
 */
 
 Route::middleware(['auth'])->group(function () {
-    // Roles Management — users who can "manage roles"
-    Route::middleware('permission:manage roles')->group(function () {
-        Route::resource('roles', RoleController::class)->names('roles');
+    /*
+    |--------------------------------------------------------------------------
+    | Users Management
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('users')->name('users.')->group(function () {
+
+        Route::get('/', [UserController::class, 'index'])
+            ->name('index')
+            ->middleware('permission:view users');
+
+        Route::get('/create', [UserController::class, 'create'])
+            ->name('create')
+            ->middleware('permission:create users');
+
+        Route::post('/store', [UserController::class, 'store'])
+            ->name('store')
+            ->middleware('permission:create users');
+
+        Route::get('/{id}/edit-role', [UserController::class, 'editRole'])
+            ->name('editRole')
+            ->middleware('permission:edit users');
+
+        Route::put('/{id}/update-role', [UserController::class, 'updateRole'])
+            ->name('updateRole')
+            ->middleware('permission:edit users');
+
+        Route::delete('/{user}/destroy', [UserController::class, 'destroy'])
+            ->name('destroy')
+            ->middleware('permission:delete users');
+
+        Route::put('/{user}/toggle-active', [UserController::class, 'toggleActive'])
+            ->name('toggleActive')
+            ->middleware('permission:edit users');
     });
 
-    // Users Management — users who can "manage users"
-    Route::middleware('permission:manage users')->group(function () {
-        Route::get('/users', [UserController::class, 'index'])->name('users.index');
-        Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-        Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
-        Route::get('/users/{id}/edit-role', [UserController::class, 'editRole'])->name('users.editRole');
-        Route::put('/users/{id}/update-role', [UserController::class, 'updateRole'])->name('users.updateRole');
-        Route::delete('/users/{user}/destroy', [UserController::class, 'destroy'])->name('users.destroy');
-        Route::put('/users/{user}/toggle-active', [UserController::class, 'toggleActive'])->name('users.toggleActive');
 
+    /*
+    |--------------------------------------------------------------------------
+    | Roles Management
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('roles')->name('roles.')->group(function () {
+
+        Route::get('/', [RoleController::class, 'index'])
+            ->name('index')
+            ->middleware('permission:view roles');
+
+        Route::get('/create', [RoleController::class, 'create'])
+            ->name('create')
+            ->middleware('permission:create roles');
+
+        Route::post('/', [RoleController::class, 'store'])
+            ->name('store')
+            ->middleware('permission:create roles');
+
+        Route::get('/{role}/edit', [RoleController::class, 'edit'])
+            ->name('edit')
+            ->middleware('permission:edit roles');
+
+        Route::put('/{role}', [RoleController::class, 'update'])
+            ->name('update')
+            ->middleware('permission:edit roles');
+
+        Route::delete('/{role}', [RoleController::class, 'destroy'])
+            ->name('destroy')
+            ->middleware('permission:delete roles');
     });
 
-    // Permissions Management — requires "manage permissions" permission
-    Route::middleware('permission:manage permissions')->group(function () {
-        Route::resource('permissions', PermissionController::class)
-            ->only(['index', 'create', 'store', 'destroy'])
-            ->names('permissions');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Permissions Management
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('permissions')->name('permissions.')->group(function () {
+
+        Route::get('/', [PermissionController::class, 'index'])
+            ->name('index')
+            ->middleware('permission:view permissions');
+
+        Route::get('/create', [PermissionController::class, 'create'])
+            ->name('create')
+            ->middleware('permission:create permissions');
+
+        Route::post('/', [PermissionController::class, 'store'])
+            ->name('store')
+            ->middleware('permission:create permissions');
+
+        Route::delete('/{permission}', [PermissionController::class, 'destroy'])
+            ->name('destroy')
+            ->middleware('permission:delete permissions');
     });
 });
 
