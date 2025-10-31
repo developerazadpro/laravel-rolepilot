@@ -22,14 +22,14 @@ class UserController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return view('users.index', compact('users', 'search'));
+        return view('admin.users.index', compact('users', 'search'));
     }
 
 
     public function create()
     {
         $roles = Role::all();
-        return view('users.create', compact('roles'));
+        return view('admin.users.create', compact('roles'));
     }
 
     public function store(Request $request)
@@ -51,7 +51,7 @@ class UserController extends Controller
             $user->assignRole($validated['role']);
         }
 
-        return redirect()->route('users.index')->with('success', 'User created successfully!');
+        return redirect()->route('admin.users.index')->with('success', 'User created successfully!');
     }
 
     public function editRole($id)
@@ -61,7 +61,7 @@ class UserController extends Controller
         $permissions = Permission::all();
         $userPermissions = $user->permissions->pluck('name')->toArray();
 
-        return view('users.edit-role', compact('user', 'roles', 'permissions', 'userPermissions'));
+        return view('admin.users.edit-role', compact('user', 'roles', 'permissions', 'userPermissions'));
     }
 
     public function updateRole(Request $request, $id)
@@ -77,13 +77,13 @@ class UserController extends Controller
         $user->syncRoles([$request->role]);
         $user->syncPermissions($request->permissions ?? []);
 
-        return redirect()->route('users.index')->with('success', 'Role and permissions updated successfully!');
+        return redirect()->route('admin.users.index')->with('success', 'Role and permissions updated successfully!');
     }
 
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('admin.users.index')->with('success', 'User deleted successfully.');
     }
 
     public function toggleActive(User $user)

@@ -25,7 +25,7 @@
 
             <!-- Users -->
             <li>
-                <a href="{{ route('users.index') }}"
+                <a href="{{ route('admin.users.index') }}"
                    class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-700 transition
                    {{ request()->routeIs('users.*') ? 'bg-gray-900 font-semibold' : '' }}">
                     <svg class="w-5 h-5 mr-3 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -41,7 +41,7 @@
 
             <!-- Roles -->
             <li>
-                <a href="{{ route('roles.index') }}"
+                <a href="{{ route('admin.roles.index') }}"
                    class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-700 transition
                    {{ request()->routeIs('roles.*') ? 'bg-gray-900 font-semibold' : '' }}">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -58,7 +58,7 @@
 
             <!-- Permissions -->
             <li>
-                <a href="{{ route('permissions.index') }}"
+                <a href="{{ route('admin.permissions.index') }}"
                    class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-700 transition
                    {{ request()->routeIs('permissions.*') ? 'bg-gray-900 font-semibold' : '' }}">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"

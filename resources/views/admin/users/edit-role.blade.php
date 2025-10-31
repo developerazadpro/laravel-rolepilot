@@ -11,7 +11,7 @@
             Edit Role & Permissions for {{ $user->name }}
         </h2>
 
-        <form method="POST" action="{{ route('users.updateRole', $user->id) }}">
+        <form method="POST" action="{{ route('admin.users.updateRole', $user->id) }}">
             @csrf
             @method('PUT')
 
@@ -57,7 +57,7 @@
 
             <!-- Action Buttons -->
             <div class="flex flex-col sm:flex-row justify-between gap-2">
-                <a href="{{ route('users.index') }}"
+                <a href="{{ route('admin.users.index') }}"
                    class="px-4 py-2 bg-gray-500 text-white text-sm font-semibold rounded hover:bg-gray-600 transition text-center">
                     Cancel
                 </a>

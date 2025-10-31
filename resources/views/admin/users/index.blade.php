@@ -17,12 +17,12 @@
 
         <!-- Search and Filter -->         
         <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-2">
-            <a href="{{ route('users.create') }}"
+            <a href="{{ route('admin.users.create') }}"
                 class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded shadow hover:bg-blue-700 transition">
                 + Add User
             </a>
 
-            <form method="GET" action="{{ route('users.index') }}" class="w-full sm:w-1/2 flex">
+            <form method="GET" action="{{ route('admin.users.index') }}" class="w-full sm:w-1/2 flex">
                 <input type="text" name="search" value="{{ $search ?? '' }}"
                     placeholder="Search users..."
                     class="flex-grow border-green-300 rounded-l-md focus:ring-green-500 focus:border-green-500">
@@ -72,11 +72,11 @@
                             </td>
 
                             <td class="py-2 px-3 sm:py-2 sm:px-4 border-b flex flex-wrap gap-2">
-                                <a href="{{ route('users.editRole', $user->id) }}"
+                                <a href="{{ route('admin.users.editRole', $user->id) }}"
                                    class="px-2 sm:px-3 py-1 text-xs sm:text-sm bg-yellow-500 text-white rounded hover:bg-yellow-600 transition">
                                     Edit
                                 </a>
-                                <form action="{{ route('users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
@@ -105,12 +105,12 @@
 
     </div>
 
-    {{-- ✅ AlpineJS toggle script --}}
+    {{-- AlpineJS toggle script --}}
     <script>
         document.addEventListener('alpine:init', () => {
             Alpine.data('userTable', () => ({
                 toggleUser(id, isActive) {
-                    fetch(`/users/${id}/toggle-active`, {
+                    fetch(`/admin/users/${id}/toggle-active`, {
                         method: 'PUT',
                         headers: {
                             'X-CSRF-TOKEN': '{{ csrf_token() }}',

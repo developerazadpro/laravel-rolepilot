@@ -9,7 +9,7 @@
 
         <h2 class="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">Create Permission</h2>
 
-        <form method="POST" action="{{ route('permissions.store') }}">
+        <form method="POST" action="{{ route('admin.permissions.store') }}">
             @csrf
 
             <div class="mb-4 sm:mb-6">
@@ -23,7 +23,7 @@
             </div>
 
             <div class="flex flex-col sm:flex-row justify-between gap-2">
-                <a href="{{ route('permissions.index') }}"
+                <a href="{{ route('admin.permissions.index') }}"
                    class="px-4 py-2 bg-gray-500 text-white text-sm sm:text-base font-semibold rounded hover:bg-gray-600 text-center">
                     Cancel
                 </a>

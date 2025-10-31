@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
@@ -27,14 +28,14 @@ Route::middleware('auth')->group(function () {
 |-------------------------------------------------------------------------------------------------------------
 */
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+
     /*
     |--------------------------------------------------------------------------
     | Users Management
     |--------------------------------------------------------------------------
     */
     Route::prefix('users')->name('users.')->group(function () {
-
         Route::get('/', [UserController::class, 'index'])
             ->name('index')
             ->middleware('permission:view users');
@@ -71,7 +72,6 @@ Route::middleware(['auth'])->group(function () {
     |--------------------------------------------------------------------------
     */
     Route::prefix('roles')->name('roles.')->group(function () {
-
         Route::get('/', [RoleController::class, 'index'])
             ->name('index')
             ->middleware('permission:view roles');
@@ -104,7 +104,6 @@ Route::middleware(['auth'])->group(function () {
     |--------------------------------------------------------------------------
     */
     Route::prefix('permissions')->name('permissions.')->group(function () {
-
         Route::get('/', [PermissionController::class, 'index'])
             ->name('index')
             ->middleware('permission:view permissions');
@@ -121,6 +120,17 @@ Route::middleware(['auth'])->group(function () {
             ->name('destroy')
             ->middleware('permission:delete permissions');
     });
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Menu Management
+    |--------------------------------------------------------------------------
+    */
+    // Route::middleware('role:Admin')->group(function () {
+    //     Route::resource('menus', MenuController::class);
+    // });
+    Route::resource('menus', MenuController::class);
 });
 
 require __DIR__.'/auth.php';

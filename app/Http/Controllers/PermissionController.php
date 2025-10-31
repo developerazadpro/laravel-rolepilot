@@ -18,12 +18,12 @@ class PermissionController extends Controller
         ->paginate(10)
         ->withQueryString();
 
-        return view('permissions.index', compact('permissions'));
+        return view('admin.permissions.index', compact('permissions'));
     }
 
     public function create()
     {
-        return view('permissions.create');
+        return view('admin.permissions.create');
     }
 
     public function store(Request $request)
@@ -34,14 +34,14 @@ class PermissionController extends Controller
 
         Permission::create(['name' => $request->name]);
 
-        return redirect()->route('permissions.index')
+        return redirect()->route('admin.permissions.index')
                          ->with('success', 'Permission created successfully.');
     }
 
     public function destroy(Permission $permission)
     {
         $permission->delete();
-        return redirect()->route('permissions.index')
+        return redirect()->route('admin.permissions.index')
                          ->with('success', 'Permission deleted successfully.');
     }
 }

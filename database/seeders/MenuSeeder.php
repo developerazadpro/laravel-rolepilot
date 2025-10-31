@@ -24,21 +24,21 @@ class MenuSeeder extends Seeder
 
         $users = Menu::create([
             'name'  => 'Users',
-            'route' => 'users.index',
+            'route' => 'admin.users.index',
             'icon'  => 'users',
             'order' => 2,
         ]);
 
         $roles = Menu::create([
             'name'  => 'Roles',
-            'route' => 'roles.index',
+            'route' => 'admin.roles.index',
             'icon'  => 'roles',
             'order' => 3,
         ]);
 
         $permissions = Menu::create([
             'name'  => 'Permissions',
-            'route' => 'permissions.index',
+            'route' => 'admin.permissions.index',
             'icon'  => 'permissions',
             'order' => 4,
         ]);

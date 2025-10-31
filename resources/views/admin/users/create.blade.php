@@ -2,14 +2,14 @@
     <x-slot name="breadcrumb">
         <nav class="text-gray-500 text-sm">
             <a href="{{ route('dashboard') }}" class="hover:underline">Dashboard</a> &gt;
-            <a href="{{ route('users.index') }}" class="hover:underline">Users</a> &gt; Create
+            <a href="{{ route('admin.users.index') }}" class="hover:underline">Users</a> &gt; Create
         </nav>
     </x-slot>
 
     <div class="max-w-3xl mx-auto p-6 bg-white shadow rounded">
         <h2 class="text-2xl font-semibold mb-6 text-gray-800">Create New User</h2>
 
-        <form method="POST" action="{{ route('users.store') }}">
+        <form method="POST" action="{{ route('admin.users.store') }}">
             @csrf
 
             <!-- Name -->
@@ -64,7 +64,7 @@
 
             <!-- Action Buttons -->
             <div class="flex justify-between">
-                <a href="{{ route('users.index') }}"
+                <a href="{{ route('admin.users.index') }}"
                    class="px-4 py-2 bg-gray-500 text-white text-sm font-semibold rounded hover:bg-gray-600 transition">
                     Cancel
                 </a>
