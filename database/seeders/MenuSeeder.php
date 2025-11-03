@@ -43,6 +43,14 @@ class MenuSeeder extends Seeder
             'order' => 4,
         ]);
 
+        $menus = Menu::create([
+            'name'  => 'Menu',
+            'route' => 'admin.menus.index',
+            'icon'  => 'menus',
+            'order' => 5,
+        ]);
+
+
         // 2. Get the Admin role from the database
         $adminRole = Role::where('name', 'Admin')->first();
 
@@ -51,5 +59,6 @@ class MenuSeeder extends Seeder
         $users->roles()->attach($adminRole);
         $roles->roles()->attach($adminRole);
         $permissions->roles()->attach($adminRole);
+        $menus->roles()->attach($adminRole);
     }
 }

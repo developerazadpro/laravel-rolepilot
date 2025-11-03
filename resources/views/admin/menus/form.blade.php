@@ -104,6 +104,17 @@
                        class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
             </div>
 
+            <!-- Active Status -->
+            <div class="mb-4 flex items-center">
+                <input type="checkbox" name="is_active" id="is_active"
+                    class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    value="1" {{ old('is_active', $menu->is_active ?? true) ? 'checked' : '' }}>
+                <label for="is_active" class="ml-2 text-sm font-medium text-gray-700">
+                    Active
+                </label>
+            </div>
+
+
             <!-- Action Buttons -->
             <div class="flex justify-between">
                 <a href="{{ route('admin.menus.index') }}"

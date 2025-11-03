@@ -14,21 +14,33 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Register role & permission seeder
+        $this->call(RolePermissionSeeder::class);
 
-        $user = User::factory()->create([
+        $admin = User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('12345678'),
         ]);
 
-        // Register role & permission seeder
-        $this->call(RolePermissionSeeder::class);
+        $editor = User::factory()->create([
+            'name' => 'Editor',
+            'email' => 'editor@gmail.com',
+            'password' => bcrypt('12345678'),
+        ]);
 
-        // Assign Admin role to first user
-        $user->assignRole('Admin');
+        $viewer = User::factory()->create([
+            'name' => 'Viewer',
+            'email' => 'viewer@gmail.com',
+            'password' => bcrypt('12345678'),
+        ]);
 
-        // Create Menu Seeder
+        // Assign roles to users
+        $admin->assignRole('Admin');
+        $editor->assignRole('Editor');
+        $viewer->assignRole('Viewer');
+
+        // Create Menus Seeder
         $this->call(MenuSeeder::class);
     }
 }

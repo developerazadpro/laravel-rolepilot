@@ -32,6 +32,7 @@
                         <th class="py-2 px-3 border-b text-left">Icon</th>
                         <th class="py-2 px-3 border-b text-left">Permission</th>
                         <th class="py-2 px-3 border-b text-left">Order</th>
+                        <th class="py-2 px-3 border-b text-left">Is Active?</th>
                         <th class="py-2 px-3 border-b text-left">Actions</th>
                     </tr>
                 </thead>
@@ -44,6 +45,7 @@
                             <td class="py-2 px-3 border-b">{{ $menu->icon ?? '—' }}</td>
                             <td class="py-2 px-3 border-b">{{ $menu->permission_name ?? '—' }}</td>
                             <td class="py-2 px-3 border-b">{{ $menu->order ?? '—' }}</td>
+                            <td class="py-2 px-3 border-b">{{ $menu->is_active ? 'Active' : 'Inactive' }}</td>
                             <td class="py-2 px-3 border-b flex gap-2">
                                 <a href="{{ route('admin.menus.edit', $menu->id) }}"
                                    class="px-3 py-1 bg-yellow-500 text-white text-xs sm:text-sm rounded hover:bg-yellow-600 transition">

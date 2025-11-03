@@ -37,9 +37,26 @@
         </svg>
         @break
 
+    @case('settings')
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="1.5"
+            class="w-5 h-5 mr-3 text-blue-400">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M10.325 4.317a1 1 0 011.35-.937 8.25 8.25 0 016.28 6.28 1 1 0 01-.937 1.35 2.25 2.25 0 000 4.98 1 1 0 01.937 1.35 8.25 8.25 0 01-6.28 6.28 1 1 0 01-1.35-.937 2.25 2.25 0 00-4.98 0 1 1 0 01-1.35.937 8.25 8.25 0 01-6.28-6.28 1 1 0 01.937-1.35 2.25 2.25 0 000-4.98 1 1 0 01-.937-1.35 8.25 8.25 0 016.28-6.28 1 1 0 011.35.937 2.25 2.25 0 004.98 0zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z" />
+        </svg>
+        @break
+
+    @case('menus')
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" 
+            fill="none" stroke="currentColor" stroke-width="1.5" 
+            class="w-5 h-5 mr-3 text-blue-400">
+            <path stroke-linecap="round" stroke-linejoin="round" 
+                d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        @break
+        
     @default
-        <svg class="w-5 h-5 mr-3 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
-             viewBox="0 0 24 24" stroke="currentColor">
-            <circle cx="12" cy="12" r="9" stroke-width="2"/>
+        <svg class="w-5 5-6 mr-3 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <circle cx="12" cy="12" r="9" stroke-width="2" />
         </svg>
 @endswitch

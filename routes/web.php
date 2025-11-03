@@ -127,10 +127,32 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     | Menu Management
     |--------------------------------------------------------------------------
     */
-    // Route::middleware('role:Admin')->group(function () {
-    //     Route::resource('menus', MenuController::class);
-    // });
-    Route::resource('menus', MenuController::class);
+    //Route::resource('menus', MenuController::class);
+    Route::prefix('menus')->name('menus.')->group(function () {
+        Route::get('/', [MenuController::class, 'index'])
+            ->name('index')
+            ->middleware('permission:view menus');
+
+        Route::get('/create', [MenuController::class, 'create'])
+            ->name('create')
+            ->middleware('permission:create menus');
+
+        Route::post('/', [MenuController::class, 'store'])
+            ->name('store')
+            ->middleware('permission:create menus');
+
+        Route::get('/{menu}/edit', [MenuController::class, 'edit'])
+            ->name('edit')
+            ->middleware('permission:edit menus');
+
+        Route::put('/{menu}', [MenuController::class, 'update'])
+            ->name('update')
+            ->middleware('permission:edit menus');
+
+        Route::delete('/{menu}', [MenuController::class, 'destroy'])
+            ->name('destroy')
+            ->middleware('permission:delete menus');
+    });
 });
 
 require __DIR__.'/auth.php';

@@ -31,6 +31,11 @@ class RolePermissionSeeder extends Seeder
             'view permissions',
             'create permissions',
             'delete permissions',
+
+            'view menus',
+            'create menus',
+            'edit menus',
+            'delete menus',
         ];
 
         // Create permissions
@@ -40,12 +45,39 @@ class RolePermissionSeeder extends Seeder
 
         // Create roles
         $adminRole = Role::firstOrCreate(['name' => 'Admin']);
-        $userRole = Role::firstOrCreate(['name' => 'User']);
+        $editorRole = Role::firstOrCreate(['name' => 'Editor']);
+        $viewerRole = Role::firstOrCreate(['name' => 'Viewer']);
 
         // Assign all permissions to Admin
         $adminRole->givePermissionTo(Permission::all());
 
-        // Assing limited permissions to User
-        $userRole->givePermissionTo(['view dashboard']);
+        // Assign limited permissions to Editor
+        $editorRole->givePermissionTo([
+            'view dashboard',
+
+            'view users',
+            'create users',
+            'edit users',
+
+            'view roles',
+            'create roles',
+            'edit roles',
+
+            'view permissions',
+            'create permissions',
+
+            'view menus',
+            'create menus',
+            'edit menus',
+        ]);
+
+        // Assign limited (read-only) permissions to Viewer
+        $viewerRole->givePermissionTo([
+            'view dashboard',
+            'view users',
+            'view roles',
+            'view permissions',
+            'view menus',
+        ]);
     }
 }

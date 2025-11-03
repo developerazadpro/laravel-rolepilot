@@ -12,7 +12,7 @@ class MenuController extends Controller
      * Display a listing of the resource.
      */
     public function index() {
-        $menus = Menu::with('children')->whereNull('parent_id')->orderBy('order')->get();
+        $menus = Menu::with('children')->orderBy('order')->get();
         return view('admin.menus.index', compact('menus'));
     }
 
@@ -36,6 +36,7 @@ class MenuController extends Controller
             'parent_id' => 'nullable|exists:menus,id',
             'order' => 'nullable|integer',
             'permission_name' => 'nullable|string|max:255',
+            'is_active' => 'boolean',
         ]);
         Menu::create($data);
         return redirect()->route('admin.menus.index')->with('success', 'Menu created successfully.');
@@ -69,7 +70,12 @@ class MenuController extends Controller
             'parent_id' => 'nullable|exists:menus,id',
             'order' => 'nullable|integer',
             'permission_name' => 'nullable|string|max:255',
+            'is_active' => 'sometimes|boolean',
         ]);
+
+        // Handle unchecked checkbox
+        $data['is_active'] = $request->has('is_active');
+
         $menu->update($data);
         return redirect()->route('admin.menus.index')->with('success', 'Menu updated successfully.');
     }
