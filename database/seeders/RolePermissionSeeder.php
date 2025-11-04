@@ -55,10 +55,6 @@ class RolePermissionSeeder extends Seeder
         $editorRole->givePermissionTo([
             'view dashboard',
 
-            'view users',
-            'create users',
-            'edit users',
-
             'view roles',
             'create roles',
             'edit roles',
@@ -74,10 +70,8 @@ class RolePermissionSeeder extends Seeder
         // Assign limited (read-only) permissions to Viewer
         $viewerRole->givePermissionTo([
             'view dashboard',
-            'view users',
             'view roles',
             'view permissions',
-            'view menus',
         ]);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Menu;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MenuController extends Controller
 {
@@ -12,7 +13,7 @@ class MenuController extends Controller
      * Display a listing of the resource.
      */
     public function index() {
-        $menus = Menu::with('children')->orderBy('order')->get();
+        $menus = Menu::visibleTo(Auth::user());
         return view('admin.menus.index', compact('menus'));
     }
 

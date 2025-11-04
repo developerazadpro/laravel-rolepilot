@@ -56,7 +56,6 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        //$user = User::findOrFail($user);
         $roles = Role::all();
         $permissions = Permission::all();
         $userPermissions = $user->permissions->pluck('name')->toArray();

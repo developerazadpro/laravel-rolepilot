@@ -20,6 +20,7 @@ class MenuSeeder extends Seeder
             'route' => 'dashboard',
             'icon'  => 'dashboard',
             'order' => 1,
+            'permission_name' => 'view dashboard', // required
         ]);
 
         $users = Menu::create([
@@ -27,6 +28,7 @@ class MenuSeeder extends Seeder
             'route' => 'admin.users.index',
             'icon'  => 'users',
             'order' => 2,
+            'permission_name' => 'view users', // required
         ]);
 
         $roles = Menu::create([
@@ -34,6 +36,7 @@ class MenuSeeder extends Seeder
             'route' => 'admin.roles.index',
             'icon'  => 'roles',
             'order' => 3,
+            'permission_name' => 'view roles', // required
         ]);
 
         $permissions = Menu::create([
@@ -41,6 +44,7 @@ class MenuSeeder extends Seeder
             'route' => 'admin.permissions.index',
             'icon'  => 'permissions',
             'order' => 4,
+            'permission_name' => 'view permissions', // required
         ]);
 
         $menus = Menu::create([
@@ -48,6 +52,7 @@ class MenuSeeder extends Seeder
             'route' => 'admin.menus.index',
             'icon'  => 'menus',
             'order' => 5,
+            'permission_name' => 'view menus', // required
         ]);
 
 
