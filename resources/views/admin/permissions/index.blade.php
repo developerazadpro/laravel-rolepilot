@@ -16,10 +16,11 @@
         @endif
         <!-- Search and Filter -->         
         <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-2">
-            <a href="{{ route('admin.permissions.create') }}"
-                class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded shadow hover:bg-blue-700 transition">
-                + Add Permission
-            </a>
+            
+            @include('admin.partials.action-toolbar', [
+                'module' => 'permissions',
+                'label' => 'Add Permission'
+            ])
 
             <form method="GET" action="{{ route('admin.permissions.index') }}" class="w-full sm:w-1/2 flex">
                 <input type="text" name="search" value="{{ $search ?? '' }}"
@@ -45,15 +46,7 @@
                         <tr class="hover:bg-gray-50">
                             <td class="py-2 px-3 sm:py-2 sm:px-4 border-b break-words">{{ $permission->name }}</td>
                             <td class="py-2 px-3 sm:py-2 sm:px-4 border-b flex flex-wrap gap-2">
-                                <form action="{{ route('admin.permissions.destroy', $permission) }}" method="POST" class="inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                            onclick="return confirm('Delete this permission?')"
-                                            class="px-2 sm:px-3 py-1 text-xs sm:text-sm bg-red-600 text-white rounded hover:bg-red-700">
-                                        Delete
-                                    </button>
-                                </form>
+                                <x-table-row-actions :module="'permissions'" :id="$permission" />
                             </td>
                         </tr>
                     @empty

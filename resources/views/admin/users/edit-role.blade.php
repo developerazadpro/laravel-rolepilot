@@ -11,7 +11,7 @@
             Edit Role & Permissions for {{ $user->name }}
         </h2>
 
-        <form method="POST" action="{{ route('admin.users.updateRole', $user->id) }}">
+        <form method="POST" action="{{ route('admin.users.update', $user->id) }}">
             @csrf
             @method('PUT')
 

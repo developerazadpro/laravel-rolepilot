@@ -17,10 +17,11 @@
 
         <!-- Search and Filter -->         
         <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-2">
-            <a href="{{ route('admin.roles.create') }}"
-                class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded shadow hover:bg-blue-700 transition">
-                + Add Role
-            </a>
+            
+            @include('admin.partials.action-toolbar', [
+                'module' => 'roles',
+                'label' => 'Add Role'
+            ])
 
             <form method="GET" action="{{ route('admin.roles.index') }}" class="w-full sm:w-1/2 flex">
                 <input type="text" name="search" value="{{ $search ?? '' }}"
@@ -47,18 +48,7 @@
                         <tr class="hover:bg-gray-50">
                             <td class="py-2 px-3 sm:py-2 sm:px-4 border-b break-words">{{ $role->name }}</td>
                             <td class="py-2 px-3 sm:py-2 sm:px-4 border-b flex flex-wrap gap-2">
-                                <a href="{{ route('admin.roles.edit', $role) }}"
-                                   class="inline-block px-2 sm:px-3 py-1 text-xs sm:text-sm bg-yellow-500 text-white rounded hover:bg-yellow-600">
-                                    Edit
-                                </a>
-                                <form action="{{ route('admin.roles.destroy', $role) }}" method="POST" class="inline">
-                                    @csrf @method('DELETE')
-                                    <button type="submit"
-                                            onclick="return confirm('Delete this role?')"
-                                            class="px-2 sm:px-3 py-1 text-xs sm:text-sm bg-red-600 text-white rounded hover:bg-red-700">
-                                        Delete
-                                    </button>
-                                </form>
+                                <x-table-row-actions :module="'roles'" :id="$role" />
                             </td>
                         </tr>
                     @endforeach

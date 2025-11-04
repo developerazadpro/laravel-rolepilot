@@ -48,12 +48,12 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
             ->name('store')
             ->middleware('permission:create users');
 
-        Route::get('/{id}/edit-role', [UserController::class, 'editRole'])
-            ->name('editRole')
+        Route::get('/{user}/edit', [UserController::class, 'edit'])
+            ->name('edit')
             ->middleware('permission:edit users');
 
-        Route::put('/{id}/update-role', [UserController::class, 'updateRole'])
-            ->name('updateRole')
+        Route::put('/{user}/update', [UserController::class, 'update'])
+            ->name('update')
             ->middleware('permission:edit users');
 
         Route::delete('/{user}/destroy', [UserController::class, 'destroy'])

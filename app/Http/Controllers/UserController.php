@@ -54,9 +54,9 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')->with('success', 'User created successfully!');
     }
 
-    public function editRole($id)
+    public function edit(User $user)
     {
-        $user = User::findOrFail($id);
+        //$user = User::findOrFail($user);
         $roles = Role::all();
         $permissions = Permission::all();
         $userPermissions = $user->permissions->pluck('name')->toArray();
@@ -64,10 +64,8 @@ class UserController extends Controller
         return view('admin.users.edit-role', compact('user', 'roles', 'permissions', 'userPermissions'));
     }
 
-    public function updateRole(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $user = User::findOrFail($id);
-
         $request->validate([
             'role' => 'required|exists:roles,name',
             'permissions' => 'array',
