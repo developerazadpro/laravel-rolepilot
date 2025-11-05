@@ -36,6 +36,8 @@ class RolePermissionSeeder extends Seeder
             'create menus',
             'edit menus',
             'delete menus',
+
+            'view logs',
         ];
 
         // Create permissions

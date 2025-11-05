@@ -54,7 +54,16 @@
                 d="M4 6h16M4 12h16M4 18h16" />
         </svg>
         @break
-        
+    
+    @case('logs')
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" 
+            stroke-width="1.5" stroke="currentColor" 
+            class="w-5 h-5 mr-3 text-blue-400">
+        <path stroke-linecap="round" stroke-linejoin="round" 
+                d="M9 12h6m-6 4h6M9 8h6M7.5 3h9a2 2 0 012 2v14a2 2 0 01-2 2h-9a2 2 0 01-2-2V5a2 2 0 012-2z" />
+        </svg>
+        @break
+
     @default
         <svg class="w-5 5-6 mr-3 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <circle cx="12" cy="12" r="9" stroke-width="2" />

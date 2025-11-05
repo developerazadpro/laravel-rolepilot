@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AuditLogController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -127,7 +128,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     | Menu Management
     |--------------------------------------------------------------------------
     */
-    //Route::resource('menus', MenuController::class);
     Route::prefix('menus')->name('menus.')->group(function () {
         Route::get('/', [MenuController::class, 'index'])
             ->name('index')
@@ -153,6 +153,18 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
             ->name('destroy')
             ->middleware('permission:delete menus');
     });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Audit Logs
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('logs')->name('logs.')->group(function () {
+        Route::get('/', [AuditLogController::class, 'index'])
+            ->name('index')
+            ->middleware('permission:view logs');
+    });
+
 });
 
 require __DIR__.'/auth.php';

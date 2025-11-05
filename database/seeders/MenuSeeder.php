@@ -55,6 +55,14 @@ class MenuSeeder extends Seeder
             'permission_name' => 'view menus', // required
         ]);
 
+        $logs = Menu::create([
+            'name'  => 'Audit Logs',
+            'route' => 'admin.logs.index',
+            'icon'  => 'logs',
+            'order' => 6,
+            'permission_name' => 'view logs', // required
+        ]);
+
 
         // 2. Get the Admin role from the database
         $adminRole = Role::where('name', 'Admin')->first();
@@ -65,5 +73,6 @@ class MenuSeeder extends Seeder
         $roles->roles()->attach($adminRole);
         $permissions->roles()->attach($adminRole);
         $menus->roles()->attach($adminRole);
+        $logs->roles()->attach($adminRole);
     }
 }

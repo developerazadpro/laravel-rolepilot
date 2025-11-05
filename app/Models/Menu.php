@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\LogsAllChanges;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Menu extends Model
 {
+    use LogsAllChanges;
+    
     protected $fillable = [
         'name', 'route', 'icon', 'parent_id', 'order', 'permission_name', 'is_active'
     ];
