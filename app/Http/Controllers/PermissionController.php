@@ -14,12 +14,12 @@ class PermissionController extends Controller
 
         $permissions = Permission::when($search, function ($query, $search){
             $query->where('name', 'like', "%{$search}%");
-        })
-        ->orderBy('name')
-        ->paginate(10)
-        ->withQueryString();
+            })
+            ->orderBy('name')
+            ->paginate(10)
+            ->withQueryString();
 
-        return view('admin.permissions.index', compact('permissions'));
+        return view('admin.permissions.index', compact('permissions', 'search'));
     }
 
     public function create()

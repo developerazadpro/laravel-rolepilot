@@ -21,16 +21,9 @@
                 'module' => 'permissions',
                 'label' => 'Add Permission'
             ])
-
-            <form method="GET" action="{{ route('admin.permissions.index') }}" class="w-full sm:w-1/2 flex">
-                <input type="text" name="search" value="{{ $search ?? '' }}"
-                    placeholder="Search permissions..."
-                    class="flex-grow border-green-300 rounded-l-md focus:ring-green-500 focus:border-green-500">
-                <button type="submit"
-                    class="px-3 bg-green-600 text-white rounded-r-md hover:bg-green-700">
-                    Search
-                </button>
-            </form>
+            
+            <x-search-form route="admin.permissions.index" :search="$search" placeholder="Search permissions..." />        
+            
         </div>
          <!--/.  -->
         <div class="overflow-x-auto">
