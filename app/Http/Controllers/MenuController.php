@@ -12,9 +12,12 @@ class MenuController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() {
-        $menus = Menu::visibleTo(Auth::user());
-        return view('admin.menus.index', compact('menus'));
+    public function index(Request $request) {
+        $search = $request->input('search');
+
+        $menus = Menu::visibleTo(Auth::user(), $search);
+
+        return view('admin.menus.index', compact('menus', 'search'));
     }
 
     /**

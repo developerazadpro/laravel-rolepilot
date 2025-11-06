@@ -28,12 +28,20 @@ class Menu extends Model
         return $this->belongsTo(Menu::class, 'parent_id');
     }
     // Get menus visible to a specific user, based on permissions.
-    public static function visibleTo($user)
+    public static function visibleTo($user, $search = null)
     {
-        return static::with('children')
-            ->orderBy('order')
-            ->get()
-            ->filter(function ($menu) use ($user) {
+        // Build the query first
+        $query = static::with('children')->orderBy('order');
+
+        // Apply search filter if provided
+        if (!empty($search)) {
+            $query->where('name', 'like', "%{$search}%");
+        }
+
+        // Get all matching menus
+        $menus = $query->get();
+        
+        return $menus->filter(function ($menu) use ($user) {
                 // Only show parent menu if user can view it
                 $showParent = $menu->permission_name ? $user->can($menu->permission_name) : true;
 

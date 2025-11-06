@@ -7,14 +7,25 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto p-4 sm:p-6 bg-white shadow rounded">
+        
+        <h2 class="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-gray-800">Menus</h2>
 
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl sm:text-2xl font-semibold text-gray-800">Menus</h2>
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-2">           
             
             @include('admin.partials.action-toolbar', [
                 'module' => 'menus',
                 'label' => 'Add Menu'
             ])
+
+            <form method="GET" action="{{ route('admin.menus.index') }}" class="w-full sm:w-1/2 flex">
+                <input type="text" name="search" value="{{ $search ?? '' }}"
+                    placeholder="Search menus..."
+                    class="flex-grow border-green-300 rounded-l-md focus:ring-green-500 focus:border-green-500">
+                <button type="submit"
+                    class="px-3 bg-green-600 text-white rounded-r-md hover:bg-green-700">
+                    Search
+                </button>
+            </form>
         </div>
 
         @if(session('success'))

@@ -7,7 +7,7 @@
 
     <div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
 
-        <h2 class="text-xl sm:text-2xl font-semibold mb-4">Roles</h2>
+        <h2 class="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-gray-800">Roles</h2>
 
         @if(session('success'))
             <div class="mb-4 px-3 sm:px-4 py-2 bg-green-100 text-green-800 rounded text-sm sm:text-base">
