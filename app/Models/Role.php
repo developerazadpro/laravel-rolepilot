@@ -3,18 +3,9 @@
 namespace App\Models;
 
 use Spatie\Permission\Models\Role as SpatieRole;
-use Spatie\Activitylog\Traits\LogsActivity;
-use Spatie\Activitylog\LogOptions;
+use App\Traits\LogsAllChanges;
 
 class Role extends SpatieRole
 {
-    use LogsActivity;
-
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults()
-            ->logAll()
-            ->useLogName('role')
-            ->setDescriptionForEvent(fn(string $eventName) => "Role has been {$eventName}");
-    }
+    use LogsAllChanges;
 }

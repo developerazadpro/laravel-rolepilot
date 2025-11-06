@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
+//use Spatie\Permission\Models\Permission;
+use App\Models\Permission;
+//use Spatie\Permission\Models\Role;
+use App\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -63,7 +66,7 @@ class UserController extends Controller
         return view('admin.users.edit-role', compact('user', 'roles', 'permissions', 'userPermissions'));
     }
 
-    public function update(Request $request, User $user)
+    /* public function update(Request $request, User $user)
     {
         $request->validate([
             'role' => 'required|exists:roles,name',
@@ -73,6 +76,45 @@ class UserController extends Controller
 
         $user->syncRoles([$request->role]);
         $user->syncPermissions($request->permissions ?? []);
+
+        return redirect()->route('admin.users.index')->with('success', 'Role and permissions updated successfully!');
+    } */
+    public function update(Request $request, User $user)
+    {
+        $request->validate([
+            'role' => 'required|exists:roles,name',
+            'permissions' => 'array',
+            'permissions.*' => 'exists:permissions,name',
+        ]);
+
+        // Capture old roles & permissions before updating
+        $oldRoles = $user->getRoleNames();
+        $oldPermissions = $user->getPermissionNames();
+
+        // Apply new role and permissions
+        $user->syncRoles([$request->role]);
+        $user->syncPermissions($request->permissions ?? []);
+
+        // Capture updated roles & permissions
+        $newRoles = $user->getRoleNames();
+        $newPermissions = $user->getPermissionNames();
+
+        // Log the change in Spatie Activity Log
+        activity()
+            ->causedBy(Auth::user()) // Who made the change
+            ->performedOn($user)       // Which user was modified
+            ->event('updated')         // Type of event
+            ->withProperties([
+                'old' => [
+                    'roles' => $oldRoles,
+                    'permissions' => $oldPermissions,
+                ],
+                'new' => [
+                    'roles' => $newRoles,
+                    'permissions' => $newPermissions,
+                ],
+            ])
+            ->log("Updated roles and permissions for user: {$user->name}");
 
         return redirect()->route('admin.users.index')->with('success', 'Role and permissions updated successfully!');
     }

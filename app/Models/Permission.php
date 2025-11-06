@@ -3,18 +3,8 @@
 namespace App\Models;
 
 use Spatie\Permission\Models\Permission as SpatiePermission;
-use Spatie\Activitylog\Traits\LogsActivity;
-use Spatie\Activitylog\LogOptions;
-
+use App\Traits\LogsAllChanges;
 class Permission extends SpatiePermission
 {
-    use LogsActivity;
-
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults()
-            ->logAll()
-            ->useLogName('permission')
-            ->setDescriptionForEvent(fn(string $eventName) => "Permission has been {$eventName}");
-    }
+    use LogsAllChanges;
 }

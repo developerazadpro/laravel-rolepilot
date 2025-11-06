@@ -12,7 +12,7 @@ class AuditLogController extends Controller
     {
         $logs = Activity::with('causer') // causer is user who performed action
                         ->latest()
-                        ->paginate(5);
+                        ->paginate(10);
 
         return view('admin.audit-logs.index', compact('logs'));
     }
