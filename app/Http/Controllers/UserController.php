@@ -60,10 +60,16 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $roles = Role::all();
-        $permissions = Permission::all();
+        //$permissions = Permission::all();
+        
+        // Group permissions by module (e.g. Users, Roles, Menus)
+        $permissions = Permission::all()->groupBy(function ($permission) {
+            $parts = explode(' ', $permission->name);
+            return ucfirst(end($parts)); // e.g. "Users"
+        });
         $userPermissions = $user->permissions->pluck('name')->toArray();
 
-        return view('admin.users.edit-role', compact('user', 'roles', 'permissions', 'userPermissions'));
+        return view('admin.users.edit', compact('user', 'roles', 'permissions', 'userPermissions'));
     }
 
     /* public function update(Request $request, User $user)

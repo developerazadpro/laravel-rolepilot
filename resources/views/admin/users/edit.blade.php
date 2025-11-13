@@ -35,25 +35,44 @@
 
             <!-- Direct Permissions -->
             <div class="mb-4 sm:mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Assign Direct Permissions</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">
+                    Assign Direct Permissions
+                </label>
                 <p class="text-xs text-gray-500 mb-2 sm:mb-3">
                     These permissions are applied <strong>in addition</strong> to the role’s permissions.
                 </p>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    @foreach($permissions as $permission)
-                        <label class="inline-flex items-center text-sm sm:text-base">
-                            <input type="checkbox" name="permissions[]" value="{{ $permission->name }}"
-                                   class="text-blue-600 border-gray-300 rounded shadow-sm focus:ring-blue-500"
-                                   {{ in_array($permission->name, $userPermissions ?? []) ? 'checked' : '' }}>
-                            <span class="ml-2">{{ $permission->name }}</span>
-                        </label>
+                <div class="space-y-4">
+                    @foreach($permissions as $module => $modulePermissions)
+                        <div class="border rounded-lg">
+                            <div class="bg-gray-100 px-3 py-2 font-semibold text-gray-700">
+                                {{ $module }} Module
+                            </div>
+                            <ul class="p-3 space-y-1">
+                                @foreach($modulePermissions as $permission)
+                                    <li>
+                                        <label class="inline-flex items-center text-sm sm:text-base">
+                                            <input
+                                                type="checkbox"
+                                                name="permissions[]"
+                                                value="{{ $permission->name }}"
+                                                {{ in_array($permission->name, $userPermissions ?? []) ? 'checked' : '' }}
+                                                class="text-blue-600 border-gray-300 rounded shadow-sm focus:ring-blue-500"
+                                            >
+                                            <span class="ml-2 text-gray-700">{{ $permission->name }}</span>
+                                        </label>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
                     @endforeach
                 </div>
+
                 @error('permissions')
                     <p class="text-xs sm:text-sm text-red-600 mt-1">{{ $message }}</p>
                 @enderror
             </div>
+
 
             <!-- Action Buttons -->
             <div class="flex flex-col sm:flex-row justify-between gap-2">
