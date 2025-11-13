@@ -2,12 +2,12 @@
 
 use App\Http\Controllers\Admin\AuditLogController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\MenuController;
+use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RoleController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\Admin\PermissionController;
 
 Route::get('/', function () {
     return view('auth.login');

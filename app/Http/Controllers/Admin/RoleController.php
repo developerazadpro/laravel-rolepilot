@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 //use Spatie\Permission\Models\Permission;
@@ -8,6 +8,8 @@ use App\Models\Permission;
 //use Spatie\Permission\Models\Role;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+
 
 class RoleController extends Controller
 {

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 //use Spatie\Permission\Models\Permission;
 use App\Models\Permission;
+use App\Http\Controllers\Controller;
 
 class PermissionController extends Controller
 {
