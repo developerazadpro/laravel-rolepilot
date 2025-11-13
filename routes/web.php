@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuditLogController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -9,12 +10,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
 
 Route::get('/', function () {
-    return view('home');
+    return view('auth.login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified', 'permission:view dashboard'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard')
+        ->middleware('auth', 'verified', 'permission:view dashboard');
 
 // Profile routes (auth required)
 Route::middleware('auth')->group(function () {

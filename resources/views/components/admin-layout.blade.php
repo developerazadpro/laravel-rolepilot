@@ -21,6 +21,9 @@
             <main class="p-6 flex-1 overflow-y-auto">
                 {{ $slot }}
             </main>
+
+            <!-- Footer -->
+            @include('layouts.admin.footer')
         </div>
     </div>
 
