@@ -110,9 +110,9 @@
         new Chart(activityCtx, {
             type: 'line',
             data: {
-                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                labels: activityLabels,
                 datasets: [{
-                    label: activityLabels,
+                    label: 'Actions Logged',
                     data: activityData,
                     borderColor: '#6366F1',
                     tension: 0.4,

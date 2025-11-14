@@ -47,9 +47,9 @@
             transition: box-shadow 0.4s ease;
         }
 
-        .popup-card:hover {
+        /* .popup-card:hover {
             box-shadow: 0 0 35px rgba(236,72,153,0.6);
-        }
+        } */
 
         @keyframes popupIn {
             0% { transform: scale(0.5); opacity: 0; }

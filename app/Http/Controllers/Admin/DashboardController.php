@@ -27,10 +27,15 @@ class DashboardController extends Controller
         $activityData = [];
         $activityLabels = [];
         for ($i = 6; $i >= 0; $i--) {
-            $date = now()->subDays($i)->format('Y-m-d');
-            $count = Activity::whereDate('created_at', $date)->count();
-            $activityLabels[] = now()->subDays($i)->format('D');
-            $activityData[] = $count;
+            $day = now()->subDays($i);
+
+            $start = $day->copy()->startOfDay();
+            $end   = $day->copy()->endOfDay();
+
+            $count = Activity::whereBetween('created_at', [$start, $end])->count();
+
+            $activityLabels[] = $day->format('D');
+            $activityData[] = $count;            
         }
         // Recent Activities
         $recentLogs = Activity::latest()->take(5)->get();
